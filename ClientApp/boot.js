@@ -1,42 +1,12 @@
-import Vue from "vue";
-import router from "./router";
-import store from "./store";
-import BootstrapVue from "bootstrap-vue";
-import VueToastr from "@deveodk/vue-toastr";
-import "@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css";
-import VeeValidate from "vee-validate";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 
-//helpers
-import "./helpers/validation";
-import "./helpers/interceptors";
-
-Vue.use(BootstrapVue);
-Vue.use(VueToastr, {
-  defaultPosition: "toast-top-right"
-});
-Vue.use(VeeValidate);
-
-// filters
-import { currency, date } from "./filters";
-
-Vue.filter("currency", currency);
-Vue.filter("date", date);
-
-import axios from "axios";
-const initialStore = localStorage.getItem("store");
-
-if (initialStore) {
-  store.commit("initialise", JSON.parse(initialStore));
-  if (store.getters.isAuthenticated) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${
-      store.state.auth.access_token
-    }`;
-  }
-}
+const routes = [
+];
 
 new Vue({
-  el: "#app-root",
-  router,
-  store,
-  render: h => h(require("./components/App.vue"))
+    el: '#app-root',
+    router: new VueRouter({ mode: 'history', routes: routes }),
+    render: h => h(require('./components/App.vue'))
 });

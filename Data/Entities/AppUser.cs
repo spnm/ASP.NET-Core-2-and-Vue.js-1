@@ -1,21 +1,17 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Data.Entities
 {
-  public class AppUser : IdentityUser<int>
-  {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string RefreshToken { get; set; }
-
-    [NotMapped]
-    public string FullName
+    public class AppUser: IdentityUser<int>
     {
-      get { return $"{FirstName} {LastName}"; }
-    }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-    public List<Order> Orders { get; set; } = new List<Order>();
-  }
+        [NotMapped]
+        public string FullName 
+        { 
+            get { return $"{FirstName} {LastName}"; }
+        }
+    }
 }

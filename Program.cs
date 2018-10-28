@@ -17,17 +17,15 @@ namespace ECommerce
     {
         public static void Main(string[] args)
         {
+            //BuildWebHost(args).Run();
             var host = BuildWebHost(args);
-
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 var dbContext = services.GetRequiredService<EcommerceContext>();
-
                 dbContext.Database.Migrate();
                 dbContext.EnsureSeeded();
             }
-
             host.Run();
         }
 
